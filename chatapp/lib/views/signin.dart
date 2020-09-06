@@ -1,7 +1,15 @@
-import 'package:chatapp/animation.dart';
+import 'package:chatapp/views/animation.dart';
+import 'package:chatapp/views/register.dart';
 import 'package:flutter/material.dart';
 
-class Register extends StatelessWidget {
+class SignIn extends StatefulWidget {
+  @override
+  _SignInState createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
+  bool _rememberMe = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,16 +110,8 @@ class Register extends StatelessWidget {
                                   child: TextField(
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
-                                        hintText: "Name",
-                                        hintStyle:
-                                            TextStyle(color: Colors.grey[400])),
-                                  ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                        border: InputBorder.none,
+                                        prefixIcon: Icon(Icons.email,
+                                            color: Colors.grey[400]),
                                         hintText: "Email or Phone number",
                                         hintStyle:
                                             TextStyle(color: Colors.grey[400])),
@@ -122,6 +122,8 @@ class Register extends StatelessWidget {
                                   child: TextField(
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
+                                        prefixIcon: Icon(Icons.lock,
+                                            color: Colors.grey[400]),
                                         hintText: "Password",
                                         hintStyle:
                                             TextStyle(color: Colors.grey[400])),
@@ -130,8 +132,72 @@ class Register extends StatelessWidget {
                               ],
                             ),
                           )),
+
+                      // forgot password
+
+                      SizedBox(height: 15),
+
+                      FadeAnimation(
+                        1.7,
+                        Container(
+                          //color: Colors.yellow,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Container(
+                                //color: Colors.brown,
+                                //checkbox
+                                child: Row(
+                                  children: <Widget>[
+                                    Theme(
+                                      data: ThemeData(
+                                          unselectedWidgetColor: Colors.grey),
+                                      child: Checkbox(
+                                          value: _rememberMe,
+                                          checkColor: Colors.white,
+                                          activeColor: Colors.indigo[400],
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _rememberMe = value;
+                                            });
+                                          }),
+                                    ),
+                                    Text(
+                                      "Remember Me",
+                                      style: TextStyle(fontSize: 12.0),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                //forgot password
+                                child: Row(children: <Widget>[
+                                  Container(
+                                    //color: Colors.pink,
+                                    alignment: Alignment.centerRight,
+                                    child: FlatButton(
+                                      onPressed: () {},
+                                      padding: EdgeInsets.only(right: 0.0),
+                                      child: Text(
+                                        "Forgot Password ?",
+                                        style: new TextStyle(
+                                          fontSize: 12.0,
+                                          color: Colors.indigo[400],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                              ),
+                            ],
+                          ), //ROW
+                        ),
+                      ),
+
+                      //login button
+
                       SizedBox(
-                        height: 30,
+                        height: 50,
                       ),
                       FadeAnimation(
                           2,
@@ -144,9 +210,7 @@ class Register extends StatelessWidget {
                                   Color.fromRGBO(143, 148, 251, .6),
                                 ])),
                             child: RaisedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
+                              onPressed: () {},
                               color: Colors.indigo[400],
                               child: Center(
                                 child: Text(
@@ -158,17 +222,42 @@ class Register extends StatelessWidget {
                               ),
                             ),
                           )),
+
                       SizedBox(
                         height: 70,
                       ),
                       FadeAnimation(
+                        1.5,
+                        Column(
+                          children: <Widget>[
+                            Text(
+                              "Don't have an Account ?",
+                              style: TextStyle(fontSize: 13.0),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      //create account button
+
+                      SizedBox(
+                        height: 10,
+                      ),
+                      FadeAnimation(
                           1.5,
                           FlatButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Register()),
+                              );
+                            },
                             child: Text(
-                              "Forgot Password?",
+                              "Create Account",
                               style: TextStyle(
-                                  color: Color.fromRGBO(143, 148, 251, 1)),
+                                  color: Color.fromRGBO(143, 148, 251, 1),
+                                  fontSize: 16.0),
                             ),
                           )),
                     ],
